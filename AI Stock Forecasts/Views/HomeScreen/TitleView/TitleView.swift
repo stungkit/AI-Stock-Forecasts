@@ -1,0 +1,28 @@
+//
+//  TitleView.swift
+//  AI Stock Forecasts
+//
+//  Created by Alexis on 9/21/20.
+//
+
+import SwiftUI
+
+struct TitleView: View {
+    var body: some View {
+        ZStack {
+            Color.white
+                .edgesIgnoringSafeArea(.top)
+                .frame(width: nil, height: 80, alignment: .center)
+            
+            HStack(alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/, spacing: 10) {
+                Image("titleImage")
+                    .resizable()
+                    .frame(width: 64, height: 64)
+                Text("AI Stock Forecasts")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+            }
+        }
+    }
+}
+
