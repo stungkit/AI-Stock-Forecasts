@@ -13,16 +13,17 @@ struct CircleControl: View {
     let segments: [Segment]
     
     @Binding var selectedSegment: Segment?
-    @Binding var hashScore: Int
-    @Binding var arobaseScore: Int
+    @Binding var hashScore: Int // from -50 to 50
+    @Binding var arobaseScore: Int // from -50 to 50
+    @Binding var newsScore: Int  // from -20 to 20
     
     var totalScore: Double {
-        let mean = Double(hashScore + arobaseScore) * 0.5
+        let mean = Double(hashScore + arobaseScore + newsScore) / 1.2 // from -100 to 100
         return mean
     }
     
     var shiftedScore: Double {
-        return totalScore + 100
+        return totalScore + 100 // from 0 to 200
     }
     
     private let lineWidth: CGFloat = 44.0

@@ -11,6 +11,8 @@ import CoreML
 
 struct SelectionView: View {
     
+    // MARK: - Variables
+    
     let swifter = Swifter(consumerKey: Keys.twitterKey, consumerSecret: Keys.twitterSecretKey)
     let model1 = try! TextClassifier1(configuration: MLModelConfiguration())
     let model2 = try! TextClassifier2(configuration: MLModelConfiguration())
@@ -43,6 +45,7 @@ struct SelectionView: View {
     
     @State private var arobaseScore: Int = 0
     @State private var hashScore: Int = 0
+    @State private var newsScore: Int = 0
     @State private var selectedCompanyIndex: Int = 0
     @State private var selectedCompanyName: String = ""
     @State private var ready: Bool = false
@@ -50,18 +53,11 @@ struct SelectionView: View {
     
     // MARK: - Screen body
     
-    private func createBody() -> some View {
-        return ZStack {
+    var body: some View {
+        ZStack {
             Color.background.edgesIgnoringSafeArea(.vertical)
             VStack(alignment: .center, spacing: 10) {
-                Text("Company Selection")
-                    .font(.system(.title))
-                    .fontWeight(.heavy)
-                    .padding(.top, 5)
-                Text("Select a company in the list below: ")
-                    .font(.system(.subheadline))
-                    .fontWeight(.regular)
-                    .foregroundColor(Color.gray.opacity(0.9))
+                createSectionTitle()
                 createPicker()
                 Spacer()
                 Image(hashes[selectedCompanyIndex])
@@ -71,20 +67,27 @@ struct SelectionView: View {
                     .padding()
                 Spacer()
                 Divider()
-                self.createButtons()
-                VStack {
-                    ProgressView("", value: progression, total: 1.0)
-                }.padding(.all, 5)
+                createButtons()
+                createProgressBar()
             }
         }
-    }
-    
-    var body: some View {
-        return self.createBody()
-            .navigationBarTitle("\(sector.capitalized)", displayMode: .inline)
+        .navigationBarTitle("\(sector.capitalized)", displayMode: .inline)
     }
     
     // MARK: - Components
+    
+    private func createSectionTitle() -> some View {
+        return VStack {
+            Text("Company Selection")
+                .font(.system(.title))
+                .fontWeight(.heavy)
+                .padding(.top, 5)
+            Text("Select a company in the list below: ")
+                .font(.system(.subheadline))
+                .fontWeight(.regular)
+                .foregroundColor(Color.gray.opacity(0.9))
+        }
+    }
     
     private func createPicker() -> some View {
         return VStack {
@@ -112,11 +115,16 @@ struct SelectionView: View {
         return HStack(spacing: 16.0) {
             
             Button(action: {
-                self.fetchTweets1(company: self.arobases[self.selectedCompanyIndex]) {
-                    self.progression = 0.5
-                    self.fetchTweets2(company: self.hashes[self.selectedCompanyIndex]) {
-                        self.progression = 1.0
-                        self.ready = true
+                let selectedCompany = String(self.arobases[self.selectedCompanyIndex].dropFirst())
+
+                fetchTweets1(company: self.arobases[self.selectedCompanyIndex]) {
+                    self.progression = 0.3
+                    fetchTweets2(company: self.hashes[self.selectedCompanyIndex]) {
+                        self.progression = 0.6
+                        fetchData(company: selectedCompany) {
+                            self.progression = 1.0
+                            self.ready = true
+                        }
                     }
                 }
                 self.selectedCompanyName = self.names[self.selectedCompanyIndex]
@@ -127,6 +135,7 @@ struct SelectionView: View {
             NavigationLink(destination: ResultView(
                 hashScore: self.$hashScore,
                 arobaseScore: self.$arobaseScore,
+                newsScore: self.$newsScore,
                 name: self.$selectedCompanyName,
                 stock: String(hashes[selectedCompanyIndex].dropFirst())
             )) {
@@ -140,16 +149,13 @@ struct SelectionView: View {
         }
     }
     
-    private func createSectionTitle(title: String, subtitle: String) -> some View {
-        return Group {
-            Text(title)
-                .font(.system(.title))
-                .fontWeight(.heavy)
-            Text(subtitle)
-                .font(.system(.headline))
-                .fontWeight(.regular)
-        }.padding()
+    private func createProgressBar() -> some View {
+        return VStack {
+            ProgressView("", value: progression, total: 1.0)
+        }.padding(.all, 5)
     }
+    
+
     
     // MARK: - functions
     
@@ -158,19 +164,17 @@ struct SelectionView: View {
         swifter.searchTweet(
             using: company,
             lang: "en",
-            count: 100,
+            count: 50,
             tweetMode: .extended,
             success: { (results, metadata) in
-                self.progression = 0.2
                 print(self.progression)
                 var tweets = [TextClassifier1Input]()
-                for i in 0...99 {
+                for i in 0...49 {
                     if let tweet = results[i]["full_text"].string {
                         tweets.append(TextClassifier1Input(text: tweet))
                     }
                 }
-                self.makePrediction1(with: tweets) {
-                    self.progression = 0.4
+                makePrediction1(with: tweets) {
                     print(self.progression)
                 }
                 print("fetchtweets done")
@@ -186,19 +190,17 @@ struct SelectionView: View {
         swifter.searchTweet(
             using: company,
             lang: "en",
-            count: 100,
+            count: 50,
             tweetMode: .extended,
             success: { (results, metadata) in
-                self.progression = 0.6
                 print(self.progression)
                 var tweets = [TextClassifier2Input]()
-                for i in 0...99 {
+                for i in 0...49 {
                     if let tweet = results[i]["full_text"].string {
                         tweets.append(TextClassifier2Input(text: tweet))
                     }
                 }
-                self.makePrediction2(with: tweets) {
-                    self.progression = 0.8
+                makePrediction2(with: tweets) {
                     print(self.progression)
                 }
                 print("fetchtweets done")
@@ -207,6 +209,36 @@ struct SelectionView: View {
             print("There was an error with the Twitter API: --> ", error)
             completion()
         }
+    }
+    
+    func fetchData(company: String, completion: @escaping () -> Void) {
+        let key = Keys.newsApiKey
+        var titles = [TextClassifier1Input]()
+        if let url = URL(string: "https://newsapi.org/v2/everything?q=\(company)&apiKey=\(key)") {
+            let session = URLSession(configuration: .default)
+            let task = session.dataTask(with: url) { (data, response, error) in
+                if error == nil {
+                    let decoder = JSONDecoder()
+                    if let safeData = data {
+                        do {
+                            let results = try decoder.decode(News.self, from: safeData)
+                            for article in results.articles {
+                                titles.append(TextClassifier1Input(text: article.title))
+                            }
+                            makePrediction3(with: titles) {
+                                print("ok")
+                            }
+                            completion()
+                        } catch {
+                            print("ERROR NEWS API --->>> ", error.localizedDescription)
+                            completion()
+                        }
+                    }
+                }
+            }
+            task.resume()
+        }
+        
     }
 
     func makePrediction1(with tweets: [TextClassifier1Input], onCompletionPrediction: @escaping () -> Void) {
@@ -223,7 +255,7 @@ struct SelectionView: View {
                     break
                 }
             }
-            arobaseScore = sentimentScore
+            self.arobaseScore = sentimentScore
             print("ML prediction done")
             onCompletionPrediction()
         } catch {
@@ -246,7 +278,30 @@ struct SelectionView: View {
                     break
                 }
             }
-            hashScore = sentimentScore
+            self.hashScore = sentimentScore
+            print("ML prediction done")
+            onCompletionPrediction()
+        } catch {
+            print("There was an error with the ML model: --> ", error)
+            onCompletionPrediction()
+        }
+    }
+    
+    func makePrediction3(with tweets: [TextClassifier1Input], onCompletionPrediction: @escaping () -> Void) {
+        do {
+            let predictions = try self.model1.predictions(inputs: tweets)
+            var sentimentScore = 0
+            for pred in predictions {
+                switch pred.label {
+                case "pos":
+                    sentimentScore += 1
+                case "neg":
+                    sentimentScore -= 1
+                default:
+                    break
+                }
+            }
+            self.newsScore = sentimentScore
             print("ML prediction done")
             onCompletionPrediction()
         } catch {

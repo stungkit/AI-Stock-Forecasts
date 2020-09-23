@@ -12,6 +12,7 @@ struct ResultView: View {
     @State var selectedSegment: Segment?
     @Binding var hashScore: Int
     @Binding var arobaseScore: Int
+    @Binding var newsScore: Int
     @Binding var name: String
     
     var stock: String
@@ -20,7 +21,7 @@ struct ResultView: View {
     
     var body: some View {
         let body = GeometryReader { geometry in
-            self.createBody(size: geometry.size)
+            createBody(size: geometry.size)
                 .edgesIgnoringSafeArea(.vertical)
                 .colorScheme(.light)
                 .navigationBarTitle("\(self.name)", displayMode: .inline)
@@ -35,30 +36,21 @@ struct ResultView: View {
         return ZStack {
             Color.background.edgesIgnoringSafeArea(.vertical)
             ScrollView {
-            VStack(alignment: .center) {
-                //self.createSectionTitle(title: "Stock Forecast Score", subtitle: "Score based on company and stock analysis")
-                StockChart(name: stock)
-                Divider()
-                self.createCircleControl(radius: circleRadius)
-                self.createDescription()
-                Spacer().frame(height: 200)
+                VStack(alignment: .center) {
+                    StockChart(name: stock)
+                    Divider()
+                    createCircleControl(radius: circleRadius)
+                    createDescription()
+                    Text("@Score: \(arobaseScore)")
+                    Text("#Score: \(hashScore)")
+                    Text("NewsScore: \(newsScore)")
+                    Spacer().frame(height: 200)
                 }
             }.padding(.top, 88.0)
         }
     }
     
     // MARK: - Components
-    
-    private func createSectionTitle(title: String, subtitle: String) -> some View {
-        return Group {
-            Text(title)
-                .font(.system(.title))
-                .fontWeight(.heavy)
-            Text(subtitle)
-                .font(.system(.headline))
-                .fontWeight(.regular)
-        }.padding()
-    }
     
     private func createDescription() -> some View {
         return Group {
@@ -113,7 +105,8 @@ struct ResultView: View {
             segments: segments,
             selectedSegment: $selectedSegment,
             hashScore: $hashScore,
-            arobaseScore: $arobaseScore
+            arobaseScore: $arobaseScore,
+            newsScore: $newsScore
         )
         
         return circleControl
