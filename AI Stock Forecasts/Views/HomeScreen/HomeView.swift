@@ -26,6 +26,7 @@ struct HomeView: View {
                     }
                 }
             }
+            .colorScheme(.light)
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarHidden(true)
         }

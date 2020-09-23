@@ -20,34 +20,20 @@ struct ResultView: View {
     // MARK: - Screen Body
     
     var body: some View {
-        let body = GeometryReader { geometry in
-            createBody(size: geometry.size)
-                .edgesIgnoringSafeArea(.vertical)
-                .colorScheme(.light)
-                .navigationBarTitle("\(self.name)", displayMode: .inline)
-        }
-                        
-        return body
-    }
-    
-    private func createBody(size: CGSize) -> some View {
-        let circleRadius = size.height / 2.0
-        
-        return ZStack {
-            Color.background.edgesIgnoringSafeArea(.vertical)
-            ScrollView {
+        GeometryReader { geometry in
+            let circleRadius = geometry.size.height / 2.0
+            ZStack {
+                Color.background.edgesIgnoringSafeArea(.vertical)
                 VStack(alignment: .center) {
                     StockChart(name: stock)
                     Divider()
                     createCircleControl(radius: circleRadius)
                     createDescription()
-                    Text("@Score: \(arobaseScore)")
-                    Text("#Score: \(hashScore)")
-                    Text("NewsScore: \(newsScore)")
-                    Spacer().frame(height: 200)
                 }
-            }.padding(.top, 88.0)
+            }
         }
+        .colorScheme(.light)
+        .navigationBarTitle("\(self.name)", displayMode: .inline)
     }
     
     // MARK: - Components
@@ -113,5 +99,5 @@ struct ResultView: View {
             .frame(width: radius, height: radius)
             .padding(16.0)
     }
-
+    
 }

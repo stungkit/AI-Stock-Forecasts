@@ -71,6 +71,7 @@ struct SelectionView: View {
                 createProgressBar()
             }
         }
+        .colorScheme(.light)
         .navigationBarTitle("\(sector.capitalized)", displayMode: .inline)
     }
     
@@ -157,7 +158,7 @@ struct SelectionView: View {
     
 
     
-    // MARK: - functions
+    // MARK: - Networking functions
     
     func fetchTweets1(company: String, completion: @escaping () -> Void) {
         
@@ -240,6 +241,8 @@ struct SelectionView: View {
         }
         
     }
+    
+    // MARK: - ML functions
 
     func makePrediction1(with tweets: [TextClassifier1Input], onCompletionPrediction: @escaping () -> Void) {
         do {
