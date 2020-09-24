@@ -1,4 +1,5 @@
 Last updated 2020-09-24.
+
 This Privacy Policy describes how your personal information is handled in AI Stock Forecasts for iOS.
 
 ### We Collect No Personal Information Using Our Application
