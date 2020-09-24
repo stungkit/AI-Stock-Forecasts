@@ -1,5 +1,7 @@
 ![Frame 1](https://user-images.githubusercontent.com/26531613/89218912-d9911580-d59c-11ea-8264-e44a06ca68ca.png)
 
+<a href="https://apps.apple.com/us/app/ai-stock-forecasts/id1527494965?ign-mpt=uo%3D2"><img src="https://user-images.githubusercontent.com/26531613/94089836-1d0c4100-fde2-11ea-9893-3b6b7b3f0b22.png"></a>
+
 ## General information about this app
 
 This iOS app predicts Fortune 100 companies stock price evolution through sentiment analysis
