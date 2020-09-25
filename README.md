@@ -7,9 +7,19 @@
 &nbsp;
 &nbsp;
 
-<a href="https://apps.apple.com/us/app/ai-stock-forecasts/id1527494965?ign-mpt=uo%3D2">
-  <img src="https://user-images.githubusercontent.com/26531613/94211816-85215c80-fea0-11ea-9056-45128e1c4c55.png" height="25%" width="25%">
-</a>
+<p>
+  <a href="https://apps.apple.com/us/app/ai-stock-forecasts/id1527494965?ign-mpt=uo%3D2">
+    <img src="https://user-images.githubusercontent.com/26531613/94211816-85215c80-fea0-11ea-9056-45128e1c4c55.png" height="25%" width="25%">
+  </a>
+  
+&nbsp;
+
+  <a href="https://alexismoulin.github.io">
+    <img src="https://user-images.githubusercontent.com/26531613/94214017-61f9ab80-fea6-11ea-9ac8-2aa8412a89b3.png" height="25%" width="25%">
+  </a>
+</p>
+
+&nbsp;
 
 ## General information about this app
 
