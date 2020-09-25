@@ -1,4 +1,5 @@
-![Frame 1](https://user-images.githubusercontent.com/26531613/89218912-d9911580-d59c-11ea-8264-e44a06ca68ca.png)
+<img src="https://user-images.githubusercontent.com/26531613/89218912-d9911580-d59c-11ea-8264-e44a06ca68ca.png" height="75%" width="75%">
+
 
 <a href="https://apps.apple.com/us/app/ai-stock-forecasts/id1527494965?ign-mpt=uo%3D2">
   <img src="https://user-images.githubusercontent.com/26531613/94211816-85215c80-fea0-11ea-9056-45128e1c4c55.png" height="25%" width="25%">
