@@ -7,17 +7,11 @@
 &nbsp;
 &nbsp;
 
-<p>
+<p align="center">
   <a href="https://apps.apple.com/us/app/ai-stock-forecasts/id1527494965?ign-mpt=uo%3D2">
     <img src="https://user-images.githubusercontent.com/26531613/94211816-85215c80-fea0-11ea-9056-45128e1c4c55.png" height="25%" width="25%">
   </a>
-  
-&nbsp;
-
-  <a href="https://alexismoulin.github.io">
-    <img src="https://user-images.githubusercontent.com/26531613/94214017-61f9ab80-fea6-11ea-9ac8-2aa8412a89b3.png" height="25%" width="25%">
-  </a>
-</p>
+ <p/>
 
 &nbsp;
 
@@ -56,6 +50,10 @@ Icons made by Icongeek26 from www.flaticon.com
 ### On the ResultScreen:
 I used the Circle Control code from this project:
 https://medium.com/swlh/replicating-the-apple-card-application-using-swiftui-f472f3947683
+
+## Landing Page & Privacy Policy
+
+You can check the [App Landing Page](https://alexismoulin.github.io) for a complete presentation and the [Privacy Policy Page](https://alexismoulin.github.io/AI-Stock-Forecasts/) for further details on how your data is handled by the application
 
 ## Open Source & Copying
 
