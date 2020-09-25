@@ -1,4 +1,4 @@
-<img src="https://user-images.githubusercontent.com/26531613/89218912-d9911580-d59c-11ea-8264-e44a06ca68ca.png" height="75%" width="75%">
+<img src="https://user-images.githubusercontent.com/26531613/94212619-a4b98480-fea2-11ea-97b5-93938a57abbc.png" height="75%" width="75%">
 
 
 <a href="https://apps.apple.com/us/app/ai-stock-forecasts/id1527494965?ign-mpt=uo%3D2">
