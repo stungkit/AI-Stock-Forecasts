@@ -1,10 +1,3 @@
-//
-//  News.swift
-//  AI Stock Forecasts
-//
-//  Created by Alexis on 9/22/20.
-//
-
 import Foundation
 
 struct News: Decodable {
