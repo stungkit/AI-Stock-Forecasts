@@ -1,10 +1,3 @@
-//
-//  CircleControl.swift
-//  Stock Forecasts
-//
-//  Created by Alexis on 9/21/20.
-//
-
 import SwiftUI
 
 struct CircleControl: View {
@@ -13,14 +6,10 @@ struct CircleControl: View {
     let segments: [Segment]
     
     @Binding var selectedSegment: Segment?
-    @Binding var hashScore: Int // from -50 to 50
-    @Binding var arobaseScore: Int // from -50 to 50
-    @Binding var newsScore: Int  // from -20 to 20
-    
-    var totalScore: Double {
-        let mean = Double(hashScore + arobaseScore + newsScore) / 1.2 // from -100 to 100
-        return mean
-    }
+    var hashScore: Int // from -50 to 50
+    var arobaseScore: Int // from -50 to 50
+    var newsScore: Int  // from -20 to 20
+    var totalScore: Double // from -100 to 100
     
     var shiftedScore: Double {
         return totalScore + 100 // from 0 to 200
@@ -68,6 +57,7 @@ struct CircleControl: View {
             
             Circle()
                 .fill(Color.background)
+                // incorrect error message with xcode12 - should work fine
                 .frame(width: innerDiametr, height: innerDiametr)
         }
     }
@@ -77,6 +67,7 @@ struct CircleControl: View {
         return Group {
             Circle().fill(Color.white)
             Circle().fill(Color.controlFill)
+                // incorrect error message with xcode12 - should work fine
                 .frame(width: diametr, height: diametr)
         }
     }
@@ -160,6 +151,7 @@ struct CircleControl: View {
             Text("Score:")
             Text("\(String(format: "%.0f", totalScore))")
         }.font(Font.system(size: 40.0, weight: .bold, design: .rounded))
+        // incorrect error message with xcode12 - should work fine
         .frame(width: diametr, height: 75.0, alignment: .center)
         .minimumScaleFactor(0.5)
     }

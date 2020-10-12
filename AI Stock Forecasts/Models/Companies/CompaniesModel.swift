@@ -1,10 +1,3 @@
-//
-//  CompaniesModel.swift
-//  Stock Forecasts
-//
-//  Created by Alexis on 9/19/20.
-//
-
 import Foundation
 
 struct CompaniesModel {

@@ -1,19 +1,13 @@
-//
-//  ResultView.swift
-//  Stock Forecasts
-//
-//  Created by Alexis on 9/21/20.
-//
-
 import SwiftUI
 
 struct ResultView: View {
     
     @State var selectedSegment: Segment?
-    @Binding var hashScore: Int
-    @Binding var arobaseScore: Int
-    @Binding var newsScore: Int
-    @Binding var name: String
+    var hashScore: Int
+    var arobaseScore: Int
+    var newsScore: Int
+    var name: String
+    var totalScore: Double
     
     var stock: String
     
@@ -29,11 +23,13 @@ struct ResultView: View {
                     Divider()
                     createCircleControl(radius: circleRadius)
                     createDescription()
-                    HStack {
+                    /* DEBUG ONLY
+                     HStack {
                         Text("#: \(hashScore) |")
                         Text("@: \(arobaseScore) |")
                         Text("news: \(newsScore) |")
                     }
+                     */
                 }
             }
         }
@@ -95,9 +91,10 @@ struct ResultView: View {
             totalBalance: totalBalance,
             segments: segments,
             selectedSegment: $selectedSegment,
-            hashScore: $hashScore,
-            arobaseScore: $arobaseScore,
-            newsScore: $newsScore
+            hashScore: hashScore,
+            arobaseScore: arobaseScore,
+            newsScore: newsScore,
+            totalScore: totalScore
         )
         
         return circleControl

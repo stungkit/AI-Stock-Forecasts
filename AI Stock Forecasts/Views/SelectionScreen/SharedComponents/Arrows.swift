@@ -23,24 +23,26 @@ struct Arrows: View {
     let grayType = Color.gray.opacity(0.5)
     var type: ArrowType
     var body: some View {
-        VStack(spacing: 0) {
-            Triangle()
-                .rotation(Angle(degrees: 180))
-                .fill(type == .up ? blueType : grayType)
-                .frame(width: 200, height: 100, alignment: .center)
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(type == .up ? blueType : grayType)
-                .frame(width: 100, height: 100, alignment: .center)
-                .padding(.bottom, 5)
-            Divider()
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundColor(type == .down ? blueType : grayType)
-                .frame(width: 100, height: 100, alignment: .center)
-                .padding(.top, 5)
-            Triangle()
-                //.stroke(Color.black, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
-                .fill(type == .down ? blueType : grayType)
-                .frame(width: 200, height: 100, alignment: .center)
+        GeometryReader { geo in
+            VStack(spacing: 0) {
+                Triangle()
+                    .rotation(Angle(degrees: 180))
+                    .fill(type == .up ? blueType : grayType)
+                    .frame(width: geo.size.height * 0.5, height: geo.size.height * 0.25, alignment: .center)
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(type == .up ? blueType : grayType)
+                    .frame(width: geo.size.height * 0.25, height: geo.size.height * 0.25, alignment: .center)
+                    .padding(.bottom, 5)
+                Divider()
+                RoundedRectangle(cornerRadius: 10)
+                    .foregroundColor(type == .down ? blueType : grayType)
+                    .frame(width: geo.size.height * 0.25, height: geo.size.height * 0.25, alignment: .center)
+                    .padding(.top, 5)
+                Triangle()
+                    //.stroke(Color.black, style: StrokeStyle(lineWidth: 10, lineCap: .round, lineJoin: .round))
+                    .fill(type == .down ? blueType : grayType)
+                    .frame(width: geo.size.height * 0.5, height: geo.size.height * 0.25, alignment: .center)
+            }
         }
     }
 }

@@ -1,15 +1,8 @@
-//
-//  HomeView.swift
-//  Stock Forecasts
-//
-//  Created by Alexis on 9/19/20.
-//
-
 import SwiftUI
 
 struct HomeView: View {
     let iconlist = [ "industrials", "healthcare", "technology", "telecom-media", "goods", "energy", "financials", "all"]
-    let layout = [GridItem(.adaptive(minimum: 128), spacing: 10, alignment: .center)]
+    let layout = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         NavigationView {

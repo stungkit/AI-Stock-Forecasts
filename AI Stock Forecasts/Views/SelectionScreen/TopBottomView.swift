@@ -18,7 +18,7 @@ struct TopBottomView: View {
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.vertical)
-            VStack {
+            VStack(spacing: 5) {
                 SectionTitle(
                     title: type == .up ? "Top 5 companies" : "Bottom 5 companies",
                     subTitle: type == .up ? "Best stock outcomes for the sector" : "Worst stock outcomes for the sector"
@@ -27,8 +27,8 @@ struct TopBottomView: View {
                 Arrows(type: type)
                 Spacer()
                 Divider()
-                createButtons()
-                ProgressView("", value: progression, total: 1.0).padding(5)
+                createButtons().padding(.top, 5)
+                ProgressView(value: progression, total: 1.0).padding(5)
             }
         }
         .colorScheme(.light)
@@ -52,6 +52,7 @@ struct TopBottomView: View {
                                 companyScoreArray.append(CompanyScore(
                                     id: UUID(),
                                     name: company.name,
+                                    symbol: company.symbol,
                                     hashScore: hashScore,
                                     arobaseScore: arobaseScore,
                                     newsScore: newsScore

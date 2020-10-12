@@ -18,18 +18,27 @@ struct TopBottomResultsView: View {
     
     var body: some View {
         Form {
-            Section(header: Text("Top 5 companies")) {
+            Section(header: Text("\(title) companies")) {
                 ForEach(type == .up ? top5Array : bottom5Array) { element in
-                    HStack {
-                        Text(element.name)
-                        Spacer()
-                        Text("score: \(Int(element.totalScore))")
-                    }.padding()
+                    NavigationLink(destination: ResultView(
+                                    hashScore: element.hashScore,
+                                    arobaseScore: element.arobaseScore,
+                        newsScore: element.newsScore,
+                        name: element.name,
+                        totalScore: element.totalScore,
+                        stock: element.symbol
+                    )) {
+                        HStack {
+                            Text(element.name)
+                            Spacer()
+                            Text("score: \(Int(element.totalScore))")
+                        }.padding()
+                    }
                 }
             }
-            .colorScheme(.light)
-            .navigationBarTitle("\(title) \(self.sector) companies", displayMode: .inline)
         }
+        .colorScheme(.light)
+        .navigationBarTitle("\(title) \(self.sector) companies", displayMode: .inline)
     }
 }
 

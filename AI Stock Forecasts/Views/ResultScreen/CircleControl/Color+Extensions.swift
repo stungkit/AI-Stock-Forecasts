@@ -1,10 +1,3 @@
-//
-//  Color+Extensions.swift
-//  Stock Forecasts
-//
-//  Created by Alexis on 9/21/20.
-//
-
 import SwiftUI
 
 extension Color {

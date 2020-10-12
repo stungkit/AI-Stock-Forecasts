@@ -38,14 +38,14 @@ struct SelectionView: View {
     @State private var selectedCompanyName: String = ""
     @State private var ready: Bool = false
     @State private var progression: Double = 0.0
-    @State private var companyScore = CompanyScore(id: UUID(), name: "ERROR", hashScore: 0, arobaseScore: 0, newsScore: 0)
+    @State private var companyScore = CompanyScore(id: UUID(), name: "ERROR", symbol: "ERROR", hashScore: 0, arobaseScore: 0, newsScore: 0)
     
     // MARK: - Screen body
     
     var body: some View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.vertical)
-            VStack(alignment: .center, spacing: 10) {
+            VStack(alignment: .center, spacing: 5) {
                 SectionTitle(title: "Company Selection", subTitle: "Select a company in the list below: ")
                 createPicker()
                 Spacer()
@@ -53,11 +53,11 @@ struct SelectionView: View {
                     .resizable()
                     .scaledToFit()
                     .logoModifier()
-                    .padding()
+                    .padding(5)
                 Spacer()
                 Divider()
-                createButtons()
-                ProgressView("", value: progression, total: 1.0).padding(5)
+                createButtons().padding(.top, 5)
+                ProgressView(value: progression, total: 1.0).padding(5)
             }
         }
         .colorScheme(.light)
@@ -102,6 +102,7 @@ struct SelectionView: View {
                             companyScore = CompanyScore(
                                 id: UUID(),
                                 name: names[selectedCompanyIndex],
+                                symbol: String(hashes[selectedCompanyIndex].dropFirst()),
                                 hashScore: hashScore,
                                 arobaseScore: arobaseScore,
                                 newsScore: newsScore
@@ -117,11 +118,13 @@ struct SelectionView: View {
             }
             
             NavigationLink(destination: ResultView(
-                hashScore: $companyScore.hashScore,
-                arobaseScore: $companyScore.arobaseScore,
-                newsScore: $companyScore.newsScore,
-                name: $selectedCompanyName,
+                hashScore: companyScore.hashScore,
+                arobaseScore: companyScore.arobaseScore,
+                newsScore: companyScore.newsScore,
+                name: selectedCompanyName,
+                totalScore: companyScore.totalScore,
                 stock: String(hashes[selectedCompanyIndex].dropFirst())
+                
             )) {
                 ready ? buttonAfterPredict : buttonBeforePredict
             }
@@ -141,7 +144,7 @@ struct LogoModifier: ViewModifier {
     func body(content: Content) -> some View {
         return //GeometryReader { geo in
             content
-                .padding(10)
+                .padding(5)
                 //.frame(height: geo.size.height)
                 .background(Color.white)
                 .clipShape(RoundedRectangle(cornerRadius: 10))

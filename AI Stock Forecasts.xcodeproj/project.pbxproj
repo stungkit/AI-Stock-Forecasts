@@ -124,7 +124,6 @@
 			isa = PBXGroup;
 			children = (
 				5E25B5CD25190FD200138E61 /* HomeScreen */,
-				5E9BC4AF251E686000329625 /* SectorTabView.swift */,
 				5E25B5C225190FD200138E61 /* SelectionScreen */,
 				5E25B5C625190FD200138E61 /* ResultScreen */,
 			);
@@ -134,6 +133,7 @@
 		5E25B5C225190FD200138E61 /* SelectionScreen */ = {
 			isa = PBXGroup;
 			children = (
+				5E9BC4AF251E686000329625 /* SectorTabView.swift */,
 				5E25B5C325190FD200138E61 /* SelectionView.swift */,
 				5E08FAA8252A7E2C00DC586A /* TopBottomView.swift */,
 				5E08FAB2252AAB9000DC586A /* TopBottomResultsView.swift */,
