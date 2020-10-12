@@ -98,4 +98,23 @@ struct CompaniesModel {
         print("KO :(")
         return nil
     }
+    
+    static func getSector(for sector: String) -> [Company]? {
+        if let fullPlist = readPropertyList() {
+            var companyList = [Company]()
+            for company in fullPlist {
+                if company["sector"] == sector {
+                    companyList.append(
+                        Company(name: company["name"] ?? "ERROR",
+                                hash: company["hash"] ?? "ERROR",
+                                arobase: company["arobase"] ?? "ERROR"
+                        )
+                    )
+                }
+            }
+            return companyList
+        }
+        print("getSector failed")
+        return nil
+    }
 }

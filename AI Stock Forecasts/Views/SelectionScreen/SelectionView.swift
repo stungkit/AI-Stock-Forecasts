@@ -1,10 +1,3 @@
-//
-//  SelectionView.swift
-//  Stock Forecasts
-//
-//  Created by Alexis on 9/20/20.
-//
-
 import SwiftUI
 import Swifter
 import CoreML
@@ -57,7 +50,7 @@ struct SelectionView: View {
         ZStack {
             Color.background.edgesIgnoringSafeArea(.vertical)
             VStack(alignment: .center, spacing: 10) {
-                createSectionTitle()
+                SectionTitle(title: "Company Selection", subTitle: "Select a company in the list below: ")
                 createPicker()
                 Spacer()
                 Image(hashes[selectedCompanyIndex])
@@ -68,7 +61,7 @@ struct SelectionView: View {
                 Spacer()
                 Divider()
                 createButtons()
-                createProgressBar()
+                ProgressView("", value: progression, total: 1.0).padding(5)
             }
         }
         .colorScheme(.light)
@@ -76,19 +69,6 @@ struct SelectionView: View {
     }
     
     // MARK: - Components
-    
-    private func createSectionTitle() -> some View {
-        return VStack {
-            Text("Company Selection")
-                .font(.system(.title))
-                .fontWeight(.heavy)
-                .padding(.top, 5)
-            Text("Select a company in the list below: ")
-                .font(.system(.subheadline))
-                .fontWeight(.regular)
-                .foregroundColor(Color.gray.opacity(0.9))
-        }
-    }
     
     private func createPicker() -> some View {
         return VStack {
@@ -149,14 +129,6 @@ struct SelectionView: View {
             }))
         }
     }
-    
-    private func createProgressBar() -> some View {
-        return VStack {
-            ProgressView("", value: progression, total: 1.0)
-        }.padding(.all, 5)
-    }
-    
-
     
     // MARK: - Networking functions
     

@@ -10,7 +10,7 @@ import SwiftUI
 struct Tile: View {
     let name: String
     var body: some View {
-        NavigationLink(destination: SelectionView(sector: name)) {
+        NavigationLink(destination: SectorTabView(sector: name)) {
             VStack {
                 Image(name)
                     .renderingMode(.original)

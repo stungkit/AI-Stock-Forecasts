@@ -29,6 +29,11 @@ struct ResultView: View {
                     Divider()
                     createCircleControl(radius: circleRadius)
                     createDescription()
+                    HStack {
+                        Text("#: \(hashScore) |")
+                        Text("@: \(arobaseScore) |")
+                        Text("news: \(newsScore) |")
+                    }
                 }
             }
         }

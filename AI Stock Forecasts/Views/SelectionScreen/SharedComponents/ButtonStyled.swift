@@ -1,10 +1,3 @@
-//
-//  ButtonStyled.swift
-//  Stock Forecasts
-//
-//  Created by Alexis on 9/20/20.
-//
-
 import SwiftUI
 
 struct ButtonStyled: View {
