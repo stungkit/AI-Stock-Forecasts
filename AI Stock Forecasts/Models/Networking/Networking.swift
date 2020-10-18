@@ -13,17 +13,18 @@ struct Networking {
         swifter.searchTweet(
             using: company,
             lang: "en",
-            count: 50,
+            count: 60,
             tweetMode: .extended,
             success: { (results, metadata) in
                 var tweets = [TextClassifier1Input]()
-                for i in 0...49 {
+                for i in 0...59 {
                     if let tweet = results[i]["full_text"].string {
                         tweets.append(TextClassifier1Input(text: tweet))
+                        print("\(i) - \(tweet)")
                     }
                 }
                 let score = model1.makePrediction1(with: tweets)
-                print("fetchtweets done")
+                print("Arobases -> \(score)")
                 completion(score)
             }) { (error) in
             print("There was an error with the Twitter API: --> ", error)
@@ -36,17 +37,18 @@ struct Networking {
         swifter.searchTweet(
             using: company,
             lang: "en",
-            count: 50,
+            count: 60,
             tweetMode: .extended,
             success: { (results, metadata) in
                 var tweets = [TextClassifier2Input]()
-                for i in 0...49 {
+                for i in 0...59 {
                     if let tweet = results[i]["full_text"].string {
                         tweets.append(TextClassifier2Input(text: tweet))
+                        print("\(i) - \(tweet)")
                     }
                 }
                 let score = model2.makePrediction2(with: tweets)
-                print("fetchtweets done")
+                print("Hashes -> \(score)")
                 completion(score)
             }) { (error) in
             print("There was an error with the Twitter API: --> ", error)
@@ -67,8 +69,10 @@ struct Networking {
                             let results = try decoder.decode(News.self, from: safeData)
                             for article in results.articles {
                                 titles.append(TextClassifier1Input(text: article.title))
+                                print(article.title)
                             }
                             let score = model1.makePrediction1(with: titles)
+                            print("News-> \(score)")
                             completion(score)
                         } catch {
                             print("ERROR NEWS API --->>> ", error.localizedDescription)

@@ -8,7 +8,7 @@ struct TopBottomView: View {
     var type: ArrowType
     
     var allCompanies: Sector {
-        Sector(companies: CompaniesModel.getSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")])
+        Sector(companies: CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")])
     }
     
     @State private var companyScoreArray: [CompanyScore] = [CompanyScore]()

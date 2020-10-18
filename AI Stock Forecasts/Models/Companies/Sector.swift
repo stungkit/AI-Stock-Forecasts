@@ -15,15 +15,3 @@ struct Sector {
         return self.companies.count
     }
 }
-
-struct CompanyScore: Identifiable, Hashable {
-    var id: UUID
-    var name: String
-    var symbol: String
-    var hashScore: Int
-    var arobaseScore: Int
-    var newsScore: Int
-    var totalScore: Double {
-        Double(hashScore + arobaseScore + newsScore) / 1.2
-    }
-}

@@ -9,7 +9,7 @@ struct ResultView: View {
     var name: String
     var totalScore: Double
     
-    var stock: String
+    var stockSymbol: String
     
     // MARK: - Screen Body
     
@@ -19,17 +19,17 @@ struct ResultView: View {
             ZStack {
                 Color.background.edgesIgnoringSafeArea(.vertical)
                 VStack(alignment: .center) {
-                    StockChart(name: stock)
+                    StockChart(name: stockSymbol)
                     Divider()
                     createCircleControl(radius: circleRadius)
                     createDescription()
-                    /* DEBUG ONLY
-                     HStack {
+                    //DEBUG ONLY
+                    /*HStack {
                         Text("#: \(hashScore) |")
                         Text("@: \(arobaseScore) |")
                         Text("news: \(newsScore) |")
                     }
-                     */
+                    */
                 }
             }
         }

@@ -8,34 +8,13 @@ struct SelectionView: View {
     
     var sector: String
     
-    var names: [String] {
-        if sector == "all" {
-            return CompaniesModel.names ?? ["ERROR"]
-        } else {
-            return CompaniesModel.getNames(for: sector) ?? ["ERROR"]
-        }
-    }
-    
-    var hashes: [String] {
-        if sector == "all" {
-            return CompaniesModel.hashes ?? ["ERROR"]
-        } else {
-            return CompaniesModel.getHashes(for: sector) ?? ["ERROR"]
-        }
-    }
-    
-    var arobases: [String] {
-        if sector == "all" {
-            return CompaniesModel.arobases ?? ["ERROR"]
-        } else {
-            return CompaniesModel.getArobases(for: sector) ?? ["ERROR"]
-        }
+    var allCompanies: Sector {
+        Sector(companies: CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")])
     }
     
     // MARK: - States
     
     @State private var selectedCompanyIndex: Int = 0
-    @State private var selectedCompanyName: String = ""
     @State private var ready: Bool = false
     @State private var progression: Double = 0.0
     @State private var companyScore = CompanyScore(id: UUID(), name: "ERROR", symbol: "ERROR", hashScore: 0, arobaseScore: 0, newsScore: 0)
@@ -49,7 +28,7 @@ struct SelectionView: View {
                 SectionTitle(title: "Company Selection", subTitle: "Select a company in the list below: ")
                 createPicker()
                 Spacer()
-                Image(hashes[selectedCompanyIndex])
+                Image(allCompanies.companies[selectedCompanyIndex].hash)
                     .resizable()
                     .scaledToFit()
                     .logoModifier()
@@ -69,14 +48,14 @@ struct SelectionView: View {
     private func createPicker() -> some View {
         return VStack {
             Picker(selection: $selectedCompanyIndex.animation(.easeInOut), label: Text("")) {
-                ForEach(0 ..< names.count) {
-                    Text(self.names[$0])
+                ForEach(0 ..< allCompanies.number) {
+                    Text(allCompanies.companies[$0].name)
                 }
             }
             .labelsHidden()
             HStack {
                 Text("Your have selected: ")
-                Text("\(names[selectedCompanyIndex])")
+                Text("\(allCompanies.companies[selectedCompanyIndex].name)")
                     .fontWeight(.bold)
                     .foregroundColor(Color.blue)
             }
@@ -92,17 +71,17 @@ struct SelectionView: View {
         return HStack(spacing: 16.0) {
             
             Button(action: {
-                let selectedCompany = String(arobases[selectedCompanyIndex].dropFirst())
-
-                network.fetchTweets1(company: arobases[selectedCompanyIndex]) { arobaseScore in
+                let selectedCompany = allCompanies.companies[selectedCompanyIndex]
+                
+                network.fetchTweets1(company: selectedCompany.arobase) { arobaseScore in
                     progression = 0.3
-                    network.fetchTweets2(company: hashes[selectedCompanyIndex]) { hashScore in
+                    network.fetchTweets2(company: selectedCompany.hash) { hashScore in
                         progression = 0.6
-                        network.fetchData(company: selectedCompany) { newsScore in
+                        network.fetchData(company: String(selectedCompany.arobase.dropFirst())) { newsScore in
                             companyScore = CompanyScore(
                                 id: UUID(),
-                                name: names[selectedCompanyIndex],
-                                symbol: String(hashes[selectedCompanyIndex].dropFirst()),
+                                name: selectedCompany.name,
+                                symbol: selectedCompany.symbol,
                                 hashScore: hashScore,
                                 arobaseScore: arobaseScore,
                                 newsScore: newsScore
@@ -112,7 +91,6 @@ struct SelectionView: View {
                         }
                     }
                 }
-                selectedCompanyName = names[selectedCompanyIndex]
             }) {
                 predictButton
             }
@@ -121,9 +99,9 @@ struct SelectionView: View {
                 hashScore: companyScore.hashScore,
                 arobaseScore: companyScore.arobaseScore,
                 newsScore: companyScore.newsScore,
-                name: selectedCompanyName,
+                name: companyScore.name,
                 totalScore: companyScore.totalScore,
-                stock: String(hashes[selectedCompanyIndex].dropFirst())
+                stockSymbol: companyScore.symbol
                 
             )) {
                 ready ? buttonAfterPredict : buttonBeforePredict

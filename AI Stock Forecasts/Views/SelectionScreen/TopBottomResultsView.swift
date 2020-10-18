@@ -21,12 +21,12 @@ struct TopBottomResultsView: View {
             Section(header: Text("\(title) companies")) {
                 ForEach(type == .up ? top5Array : bottom5Array) { element in
                     NavigationLink(destination: ResultView(
-                                    hashScore: element.hashScore,
-                                    arobaseScore: element.arobaseScore,
+                        hashScore: element.hashScore,
+                        arobaseScore: element.arobaseScore,
                         newsScore: element.newsScore,
                         name: element.name,
                         totalScore: element.totalScore,
-                        stock: element.symbol
+                        stockSymbol: element.symbol
                     )) {
                         HStack {
                             Text(element.name)

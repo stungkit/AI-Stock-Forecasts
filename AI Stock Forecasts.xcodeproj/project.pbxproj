@@ -11,6 +11,7 @@
 		5E08FAB0252A9C2700DC586A /* Sector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08FAAF252A9C2700DC586A /* Sector.swift */; };
 		5E08FAB3252AAB9000DC586A /* TopBottomResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08FAB2252AAB9000DC586A /* TopBottomResultsView.swift */; };
 		5E1561032533BB3F009A0158 /* Arrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1561022533BB3F009A0158 /* Arrows.swift */; };
+		5E1D9FCC253C8ED0004CD687 /* CompanyScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1D9FCB253C8ED0004CD687 /* CompanyScore.swift */; };
 		5E25B5AE25190E3D00138E61 /* AI_Stock_ForecastsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E25B5AD25190E3D00138E61 /* AI_Stock_ForecastsApp.swift */; };
 		5E25B5B225190E3F00138E61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E25B5B125190E3F00138E61 /* Assets.xcassets */; };
 		5E25B5B525190E3F00138E61 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E25B5B425190E3F00138E61 /* Preview Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		5E08FAAF252A9C2700DC586A /* Sector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sector.swift; sourceTree = "<group>"; };
 		5E08FAB2252AAB9000DC586A /* TopBottomResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBottomResultsView.swift; sourceTree = "<group>"; };
 		5E1561022533BB3F009A0158 /* Arrows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrows.swift; sourceTree = "<group>"; };
+		5E1D9FCB253C8ED0004CD687 /* CompanyScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyScore.swift; sourceTree = "<group>"; };
 		5E25B5AA25190E3D00138E61 /* AI Stock Forecasts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AI Stock Forecasts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E25B5AD25190E3D00138E61 /* AI_Stock_ForecastsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Stock_ForecastsApp.swift; sourceTree = "<group>"; };
 		5E25B5B125190E3F00138E61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 				5E25B5DE25190FDC00138E61 /* companies.plist */,
 				5E25B5DF25190FDC00138E61 /* CompaniesModel.swift */,
 				5E08FAAF252A9C2700DC586A /* Sector.swift */,
+				5E1D9FCB253C8ED0004CD687 /* CompanyScore.swift */,
 			);
 			path = Companies;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 				5E25B5E325190FDC00138E61 /* CompaniesModel.swift in Sources */,
 				5E84915A251AE1C3001AD6F0 /* News.swift in Sources */,
 				5E66CCDA2534C75E004E9274 /* Networking.swift in Sources */,
+				5E1D9FCC253C8ED0004CD687 /* CompanyScore.swift in Sources */,
 				5E9BC4B0251E686000329625 /* SectorTabView.swift in Sources */,
 				5E25B5EE2519125B00138E61 /* TitleView.swift in Sources */,
 				5E25B5D625190FD200138E61 /* HomeView.swift in Sources */,
