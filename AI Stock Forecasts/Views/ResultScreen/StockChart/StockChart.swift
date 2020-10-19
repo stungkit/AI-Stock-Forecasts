@@ -1,10 +1,3 @@
-//
-//  StockChart.swift
-//  Stock Forecasts
-//
-//  Created by Alexis on 9/21/20.
-//
-
 import SwiftUI
 import Combine
 
@@ -21,10 +14,7 @@ struct StockChart: View {
     
     var body: some View {
         return VStack {
-            Text("Stock Forecast Score")
-                .font(.system(.title))
-                .fontWeight(.heavy)
-            Text("Score based on company and stock analysis")
+            Text("Stock chart for the last day")
                 .font(.system(.subheadline))
                 .fontWeight(.regular)
                 .foregroundColor(Color.gray.opacity(0.9))
@@ -37,7 +27,7 @@ struct StockChart: View {
                     .foregroundColor(.blue)
                 Text(": $\(stocks.currentPrice)")
             }
-            //LineView(data: stocks.prices)
+            LineView(data: stocks.prices)
         }
     }
 }

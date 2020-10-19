@@ -18,18 +18,14 @@ struct ResultView: View {
             let circleRadius = geometry.size.height / 2.0
             ZStack {
                 Color.background.edgesIgnoringSafeArea(.vertical)
-                VStack(alignment: .center) {
-                    StockChart(name: stockSymbol)
-                    Divider()
-                    createCircleControl(radius: circleRadius)
-                    createDescription()
-                    //DEBUG ONLY
-                    /*HStack {
-                        Text("#: \(hashScore) |")
-                        Text("@: \(arobaseScore) |")
-                        Text("news: \(newsScore) |")
+                ScrollView {
+                    VStack(alignment: .center) {
+                        SectionTitle(title: "Stock Forecast Score", subTitle: "Score based on company and stock analysis")
+                        createCircleControl(radius: circleRadius)
+                        createDescription()
+                        Divider()
+                        StockChart(name: stockSymbol)
                     }
-                    */
                 }
             }
         }
@@ -100,6 +96,15 @@ struct ResultView: View {
         return circleControl
             .frame(width: radius, height: radius)
             .padding(16.0)
+    }
+    
+    // MARK: - Debug
+    private func createDebug() -> some View {
+        HStack {
+             Text("#: \(hashScore) |")
+             Text("@: \(arobaseScore) |")
+             Text("news: \(newsScore) |")
+         }
     }
     
 }

@@ -6,8 +6,9 @@ struct CircleControl: View {
     let segments: [Segment]
     
     @Binding var selectedSegment: Segment?
-    var hashScore: Int // from -50 to 50
-    var arobaseScore: Int // from -50 to 50
+    
+    var hashScore: Int // from -60 to 60
+    var arobaseScore: Int // from -60 to 60
     var newsScore: Int  // from -20 to 20
     var totalScore: Double // from -100 to 100
     
@@ -21,16 +22,16 @@ struct CircleControl: View {
     
     var body: some View {
         let body = GeometryReader { geometry in
-            self.createBody(size: geometry.size)
+            createBody(size: geometry.size)
         }
             
         return body.onAppear {
-            self.selectedSegment = self.currentSegment()
+            selectedSegment = currentSegment()
         }
     }
     
     private func createBody(size: CGSize) -> some View {
-        let controlRadius = size.width / 2.0
+        let controlRadius: CGFloat = size.width / 2.0
         
         return ZStack {
             createOuterCircle(radius: controlRadius)
@@ -45,10 +46,21 @@ struct CircleControl: View {
     
     // MARK: - Components
     
+    private func createOuterCircle(radius: CGFloat) -> some View {
+        let diametr: CGFloat = radius * 2.0 - 4.0
+
+        return Group {
+            Circle().fill(Color.white)
+            Circle().fill(Color.controlFill)
+                // incorrect error message with xcode12 - should work fine
+                .frame(width: diametr, height: diametr)
+        }
+    }
+    
     private func createInnerCircle(radius: CGFloat) -> some View {
-        let diametr = radius * 2.0 - self.lineWidth * 2.0
+        let diametr = radius * 2.0 - lineWidth * 2.0
         let innerDiametr = diametr - 4.0
-        print("RADIUS -> ", radius)
+        
         return Group {
             Circle()
                 .fill(Color.white)
@@ -59,16 +71,6 @@ struct CircleControl: View {
                 .fill(Color.background)
                 // incorrect error message with xcode12 - should work fine
                 .frame(width: innerDiametr, height: innerDiametr)
-        }
-    }
-    
-    private func createOuterCircle(radius: CGFloat) -> some View {
-        let diametr = radius * 2.0 - 4.0
-        return Group {
-            Circle().fill(Color.white)
-            Circle().fill(Color.controlFill)
-                // incorrect error message with xcode12 - should work fine
-                .frame(width: diametr, height: diametr)
         }
     }
     

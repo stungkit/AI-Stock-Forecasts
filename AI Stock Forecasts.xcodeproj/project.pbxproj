@@ -12,6 +12,7 @@
 		5E08FAB3252AAB9000DC586A /* TopBottomResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E08FAB2252AAB9000DC586A /* TopBottomResultsView.swift */; };
 		5E1561032533BB3F009A0158 /* Arrows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1561022533BB3F009A0158 /* Arrows.swift */; };
 		5E1D9FCC253C8ED0004CD687 /* CompanyScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1D9FCB253C8ED0004CD687 /* CompanyScore.swift */; };
+		5E1D9FD1253CDFD0004CD687 /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E1D9FD0253CDFD0004CD687 /* LineView.swift */; };
 		5E25B5AE25190E3D00138E61 /* AI_Stock_ForecastsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E25B5AD25190E3D00138E61 /* AI_Stock_ForecastsApp.swift */; };
 		5E25B5B225190E3F00138E61 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E25B5B125190E3F00138E61 /* Assets.xcassets */; };
 		5E25B5B525190E3F00138E61 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5E25B5B425190E3F00138E61 /* Preview Assets.xcassets */; };
@@ -44,6 +45,7 @@
 		5E08FAB2252AAB9000DC586A /* TopBottomResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBottomResultsView.swift; sourceTree = "<group>"; };
 		5E1561022533BB3F009A0158 /* Arrows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Arrows.swift; sourceTree = "<group>"; };
 		5E1D9FCB253C8ED0004CD687 /* CompanyScore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyScore.swift; sourceTree = "<group>"; };
+		5E1D9FD0253CDFD0004CD687 /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
 		5E25B5AA25190E3D00138E61 /* AI Stock Forecasts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AI Stock Forecasts.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E25B5AD25190E3D00138E61 /* AI_Stock_ForecastsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Stock_ForecastsApp.swift; sourceTree = "<group>"; };
 		5E25B5B125190E3F00138E61 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				5E25B5CC25190FD200138E61 /* StockChart.swift */,
+				5E1D9FD0253CDFD0004CD687 /* LineView.swift */,
 			);
 			path = StockChart;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				5E25B5EE2519125B00138E61 /* TitleView.swift in Sources */,
 				5E25B5D625190FD200138E61 /* HomeView.swift in Sources */,
 				5E08FAA9252A7E2C00DC586A /* TopBottomView.swift in Sources */,
+				5E1D9FD1253CDFD0004CD687 /* LineView.swift in Sources */,
 				5E25B5AE25190E3D00138E61 /* AI_Stock_ForecastsApp.swift in Sources */,
 				5E25B5D025190FD200138E61 /* SelectionView.swift in Sources */,
 				5E2B9DEA25312D68001DC30D /* Models.swift in Sources */,
@@ -476,7 +480,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"AI Stock Forecasts/Preview Content\"";
 				DEVELOPMENT_TEAM = R28KNM82KD;
 				ENABLE_PREVIEWS = YES;
@@ -486,7 +490,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alex.AI-Stock-Forecasts";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -500,7 +504,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"AI Stock Forecasts/Preview Content\"";
 				DEVELOPMENT_TEAM = R28KNM82KD;
 				ENABLE_PREVIEWS = YES;
@@ -510,7 +514,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.alex.AI-Stock-Forecasts";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
