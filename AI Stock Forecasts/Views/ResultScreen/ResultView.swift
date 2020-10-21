@@ -38,12 +38,12 @@ struct ResultView: View {
     private func createDescription() -> some View {
         return Group {
             Text(selectedSegment?.title ?? "")
-                .font(.system(.headline))
+                .font(.headline)
                 .fontWeight(.semibold)
                 .fixedSize(horizontal: false, vertical: true)
             Group {
                 Text(selectedSegment?.description ?? "")
-                    .font(.system(.subheadline))
+                    .font(.subheadline)
                     .fontWeight(.regular)
                     .foregroundColor(Color.gray.opacity(0.9))
                     .fixedSize(horizontal: false, vertical: true)
