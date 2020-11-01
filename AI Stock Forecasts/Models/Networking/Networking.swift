@@ -1,7 +1,6 @@
 import Foundation
 import Swifter
 
-
 struct Networking {
     
     let swifter = Swifter(consumerKey: Keys.twitterKey, consumerSecret: Keys.twitterSecretKey)
