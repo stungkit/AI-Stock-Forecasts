@@ -1,6 +1,7 @@
 import Foundation
 import Combine
 
+// not used in the app - maybe used later
 class Stocks : ObservableObject{
     
     @Published var prices = [Double]()
@@ -22,6 +23,7 @@ class Stocks : ObservableObject{
     
     
     func fetchStockPrice() {
+        var test: Int = 1
         URLSession.shared.dataTaskPublisher(for: URL(string: "\(urlBase)")!)
             .map { output in
                 return output.data
@@ -29,7 +31,8 @@ class Stocks : ObservableObject{
             .decode(type: StocksDaily.self, decoder: JSONDecoder())
             .sink(
                 receiveCompletion: { _ in
-                    print("Alpha Vantage call completed")
+                    print("Alpha Vantage call completed - \(test)")
+                    test += 1
                 },
                 receiveValue: { [self] value in
                     var stockPrices = [Double]()

@@ -39,6 +39,7 @@
 		5E7120B3253E62CA00D4C698 /* Stocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7120B2253E62CA00D4C698 /* Stocks.swift */; };
 		5E84915A251AE1C3001AD6F0 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E849159251AE1C3001AD6F0 /* News.swift */; };
 		5E9BC4B0251E686000329625 /* SectorTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9BC4AF251E686000329625 /* SectorTabView.swift */; };
+		5EF48E72254C3B0000BD4401 /* YahooFinance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF48E71254C3B0000BD4401 /* YahooFinance.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		5E7120B2253E62CA00D4C698 /* Stocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stocks.swift; sourceTree = "<group>"; };
 		5E849159251AE1C3001AD6F0 /* News.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
 		5E9BC4AF251E686000329625 /* SectorTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectorTabView.swift; sourceTree = "<group>"; };
+		5EF48E71254C3B0000BD4401 /* YahooFinance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YahooFinance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,6 +252,7 @@
 			isa = PBXGroup;
 			children = (
 				5E7120B2253E62CA00D4C698 /* Stocks.swift */,
+				5EF48E71254C3B0000BD4401 /* YahooFinance.swift */,
 			);
 			path = Stocks;
 			sourceTree = "<group>";
@@ -358,6 +361,7 @@
 				5E08FAA9252A7E2C00DC586A /* TopBottomView.swift in Sources */,
 				5E25B5AE25190E3D00138E61 /* AI_Stock_ForecastsApp.swift in Sources */,
 				5E25B5D025190FD200138E61 /* SelectionView.swift in Sources */,
+				5EF48E72254C3B0000BD4401 /* YahooFinance.swift in Sources */,
 				5E2B9DEA25312D68001DC30D /* Models.swift in Sources */,
 				5E25B5E125190FDC00138E61 /* TextClassifier1.mlmodel in Sources */,
 				5E25B5D325190FD200138E61 /* Color+Extensions.swift in Sources */,

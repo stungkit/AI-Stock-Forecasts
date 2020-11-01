@@ -24,7 +24,7 @@ struct ResultView: View {
                         createCircleControl(radius: circleRadius)
                         createDescription()
                         Divider()
-                        StockChart(name: stockSymbol)
+                        StockChart(stockSymbol: stockSymbol)
                     }
                 }
             }

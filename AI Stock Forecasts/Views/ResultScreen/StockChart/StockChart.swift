@@ -3,14 +3,10 @@ import Charts
 
 struct StockChart: View {
     
-    @ObservedObject var stocks = Stocks(stockSymbol: "....")
+    //@ObservedObject var stocks = Stocks(stockSymbol: "....")
+    var stockSymbol: String
     
-    var name: String
-    
-    init(name: String) {
-        self.name = name
-        self.stocks = Stocks(stockSymbol: name)
-    }
+    @State var stockPrices: [Double] = [Double]()
     
     func createBarChart(stocks: [Double]) -> some View {
         var stockEntries = [BarChartDataEntry]()
@@ -23,7 +19,7 @@ struct StockChart: View {
     
     var body: some View {
         return VStack {
-            Text("Stock chart for the 100 last days")
+            Text("Daily stock chart for the last month")
                 .font(.headline)
                 .fontWeight(.semibold)
                 .padding(.bottom, 5)
@@ -31,19 +27,29 @@ struct StockChart: View {
             HStack(alignment: .center, spacing: 0) {
                 Text("Current stock price for ")
                     .font(.subheadline)
-                Text("\(name)")
+                Text("\(stockSymbol)")
                     .fontWeight(.bold)
                     .foregroundColor(.blue)
-                Text(": $\(stocks.currentPrice)")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
+                if !stockPrices.isEmpty {
+                    let roundedPrice = String(format: "%.2f", stockPrices.last!)
+                    Text(": $\(roundedPrice)")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                } else {
+                    Text("...")
+                        .font(.subheadline)
+                        .fontWeight(.bold)
+                }
             }
-            if stocks.prices.isEmpty {
+            if stockPrices.isEmpty {
                 ProgressView("loading data...")
+            } else {
+                createBarChart(stocks: stockPrices).frame(height: 200)
             }
-            else {
-                createBarChart(stocks: stocks.prices).frame(height: 200)
-            }
+        }.onAppear { YahooFinance.getHistoricalData(stockSymbol: stockSymbol) { results in
+            stockPrices = results
+        }
+        
         }
     }
 }
