@@ -5,6 +5,7 @@ struct Bar: UIViewRepresentable {
     var entries: [BarChartDataEntry]
     func makeUIView(context: Context) -> BarChartView {
         let chart = BarChartView()
+        chart.legend.enabled = false
         chart.data = addData()
         return chart
     }
@@ -17,6 +18,7 @@ struct Bar: UIViewRepresentable {
         let data = BarChartData()
         let dataSet = BarChartDataSet(entries: entries)
         dataSet.colors = [.systemGreen]
+        dataSet.drawValuesEnabled = false
         data.addDataSet(dataSet)
         return data
     }

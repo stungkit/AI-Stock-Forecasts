@@ -3,12 +3,12 @@ import SwiftUI
 struct ResultView: View {
     
     @State var selectedSegment: Segment?
+    
     var hashScore: Int
     var arobaseScore: Int
     var newsScore: Int
     var name: String
     var totalScore: Double
-    
     var stockSymbol: String
     
     // MARK: - Screen Body

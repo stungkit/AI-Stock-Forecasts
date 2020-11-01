@@ -9,7 +9,7 @@ struct HomeView: View {
             ZStack {
                 Color.background.edgesIgnoringSafeArea(.bottom)
                 VStack {
-                    TitleView()
+                    HeaderView()
                     ScrollView {
                         LazyVGrid(columns: layout, spacing: 10) {
                             ForEach(iconlist, id: \.self) { item in
@@ -19,7 +19,6 @@ struct HomeView: View {
                     }
                 }
             }
-            .colorScheme(.light)
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarHidden(true)
         }

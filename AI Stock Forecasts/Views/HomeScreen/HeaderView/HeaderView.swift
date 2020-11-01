@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct TitleView: View {
+struct HeaderView: View {
     var body: some View {
         ZStack {
-            Color.white
+            Color(UIColor(named: "HeaderViewColor") ?? UIColor.white)
                 .edgesIgnoringSafeArea(.top)
                 .frame(width: nil, height: 80, alignment: .center)
             

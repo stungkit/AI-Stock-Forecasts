@@ -3,7 +3,6 @@ import Charts
 
 struct StockChart: View {
     
-    //@ObservedObject var stocks = Stocks(stockSymbol: "....")
     var stockSymbol: String
     
     @State var stockPrices: [Double] = [Double]()
@@ -14,7 +13,6 @@ struct StockChart: View {
             stockEntries.append(BarChartDataEntry(x: Double(i), y: stocks[i]))
         }
         return Bar(entries: stockEntries)
-        
     }
     
     var body: some View {

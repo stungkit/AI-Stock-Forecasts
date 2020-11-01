@@ -6,7 +6,7 @@ struct YahooFinance {
         
         let headers = [
             "x-rapidapi-host": "apidojo-yahoo-finance-v1.p.rapidapi.com",
-            "x-rapidapi-key": "02770fe327msh7865469d1d4136fp1eeccfjsnbd50b3b1295c"
+            "x-rapidapi-key": Keys.rapidAPIKey
         ]
         
         let request = NSMutableURLRequest(url: NSURL(string: "https://apidojo-yahoo-finance-v1.p.rapidapi.com/market/get-charts?region=US&symbol=\(stockSymbol)&interval=1d&range=1mo")! as URL,
@@ -26,7 +26,6 @@ struct YahooFinance {
                     do {
                         let results = try decoder.decode(Chart.self, from: safeData)
                         let stockPrices = results.chart.result[0].indicators.quote[0].close
-                        print("nombre elements\(stockPrices.count)")
                         print("data -> \n \(stockPrices)")
                         stockPriceArray = stockPrices
                     } catch {
