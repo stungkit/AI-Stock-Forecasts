@@ -8,8 +8,8 @@ struct SelectionView: View {
     
     var sector: String
     
-    var allCompanies: Sector {
-        Sector(companies: CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")])
+    var allCompanies: [Company] {
+        CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")]
     }
     
     // MARK: - States
@@ -28,7 +28,7 @@ struct SelectionView: View {
                 SectionTitle(title: "Company Selection", subTitle: "Select a company in the list below: ")
                 createPicker()
                 Spacer()
-                Image(allCompanies.companies[selectedCompanyIndex].hash)
+                Image(allCompanies[selectedCompanyIndex].hash)
                     .resizable()
                     .scaledToFit()
                     .logoModifier()
@@ -48,14 +48,14 @@ struct SelectionView: View {
     private func createPicker() -> some View {
         return VStack {
             Picker(selection: $selectedCompanyIndex.animation(.easeInOut), label: Text("")) {
-                ForEach(0 ..< allCompanies.number) {
-                    Text(allCompanies.companies[$0].name)
+                ForEach(0 ..< allCompanies.count) {
+                    Text(allCompanies[$0].name)
                 }
             }
             .labelsHidden()
             HStack {
                 Text("Your have selected: ")
-                Text("\(allCompanies.companies[selectedCompanyIndex].name)")
+                Text("\(allCompanies[selectedCompanyIndex].name)")
                     .fontWeight(.bold)
                     .foregroundColor(Color.blue)
             }
@@ -71,7 +71,7 @@ struct SelectionView: View {
         return HStack(spacing: 16.0) {
             
             Button(action: {
-                let selectedCompany = allCompanies.companies[selectedCompanyIndex]
+                let selectedCompany = allCompanies[selectedCompanyIndex]
                 
                 network.fetchTweets1(company: selectedCompany.arobase) { arobaseScore in
                     progression = 0.3

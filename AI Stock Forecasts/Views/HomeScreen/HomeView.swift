@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct HomeView: View {
-    let iconlist = [ "industrials", "healthcare", "technology", "telecom-media", "goods", "energy", "financials", "all"]
+    let sectorlist = [ "industrials", "healthcare", "technology", "telecom-media", "goods", "energy", "financials", "all"]
     let layout = [GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -12,8 +12,8 @@ struct HomeView: View {
                     HeaderView()
                     ScrollView {
                         LazyVGrid(columns: layout, spacing: 10) {
-                            ForEach(iconlist, id: \.self) { item in
-                                Tile(name: item)
+                            ForEach(sectorlist, id: \.self) { sector in
+                                Tile(sector: sector)
                             }
                         }
                     }

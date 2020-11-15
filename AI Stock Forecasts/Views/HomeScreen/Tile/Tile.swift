@@ -1,11 +1,11 @@
 import SwiftUI
 
 struct Tile: View {
-    let name: String
+    let sector: String
     var body: some View {
-        NavigationLink(destination: SectorTabView(sector: name)) {
+        NavigationLink(destination: SectorTabView(sector: sector)) {
             VStack {
-                Image(name)
+                Image(sector)
                     .renderingMode(.original)
                     .resizable()
                     .frame(width: 128, height: 128)
@@ -13,7 +13,7 @@ struct Tile: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20))
                     .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.gray, lineWidth: 2))
                 Divider()
-                Text(name.uppercased())
+                Text(sector.uppercased())
             }
         }
     }

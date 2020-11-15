@@ -7,8 +7,8 @@ struct TopBottomView: View {
     var sector: String
     var type: ArrowType
     
-    var allCompanies: Sector {
-        Sector(companies: CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")])
+    var allCompanies: [Company] {
+        CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")]
     }
     
     @State private var companyScoreArray: [CompanyScore] = [CompanyScore]()
@@ -44,11 +44,11 @@ struct TopBottomView: View {
         return HStack(spacing: 16.0) {
             
             Button(action: {
-                for company in allCompanies.companies {
+                for company in allCompanies {
                     network.fetchTweets1(company: company.arobase) { arobaseScore in
                         network.fetchTweets2(company: company.hash) { hashScore in
                             network.fetchData(company: company.symbol) { newsScore in
-                                progression += 1.0 / Double(allCompanies.number)
+                                progression += 1.0 / Double(allCompanies.count)
                                 companyScoreArray.append(CompanyScore(
                                     id: UUID(),
                                     name: company.name,
@@ -60,7 +60,7 @@ struct TopBottomView: View {
                                 companyScoreArray.sort {
                                     $0.totalScore > $1.totalScore
                                 }
-                                ready = (allCompanies.number == companyScoreArray.count)
+                                ready = (allCompanies.count == companyScoreArray.count)
                             }
                         }
                     }
