@@ -21,8 +21,8 @@ struct CompanyScore: Identifiable, Hashable {
     }
 }
 
-class CompanyScore2: ObservableObject {
-    
+class Company2: ObservableObject {
+// may be used later to harmonize datastructures
     @Published var name: String
     @Published var hash: String
     @Published var arobase: String
