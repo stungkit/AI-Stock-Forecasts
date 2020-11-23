@@ -21,7 +21,8 @@ struct SectorTabView: View {
                 }
         }
         .colorScheme(.light)
-        .navigationBarTitle("\(sector.capitalized)", displayMode: .inline)
+        .navigationTitle("\(sector.capitalized)")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
 }

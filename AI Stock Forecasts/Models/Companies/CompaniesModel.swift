@@ -16,9 +16,9 @@ struct CompaniesModel {
     
     static func getAllCompaniesFromSector(for sector: String) -> [Company]? {
         if let fullPlist = readPropertyList() {
-            var companyList = [Company]()
+            var companyList: [Company] = []
             for company in fullPlist {
-                if company["sector"] == sector {
+                if company["sector"] == sector || sector == "all" {
                     companyList.append(
                         Company(name: company["name"] ?? "ERROR",
                                 hash: company["hash"] ?? "ERROR",

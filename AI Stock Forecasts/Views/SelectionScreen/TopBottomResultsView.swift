@@ -38,7 +38,8 @@ struct TopBottomResultsView: View {
             }
         }
         .colorScheme(.light)
-        .navigationBarTitle("\(title) \(self.sector) companies", displayMode: .inline)
+        .navigationTitle("\(sector.capitalized)")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

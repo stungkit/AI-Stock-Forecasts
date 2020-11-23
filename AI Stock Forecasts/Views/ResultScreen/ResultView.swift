@@ -30,7 +30,8 @@ struct ResultView: View {
             }
         }
         .colorScheme(.light)
-        .navigationBarTitle("\(self.name)", displayMode: .inline)
+        .navigationTitle(name)
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     // MARK: - Components

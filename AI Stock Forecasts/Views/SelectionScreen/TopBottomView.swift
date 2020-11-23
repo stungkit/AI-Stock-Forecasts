@@ -32,7 +32,8 @@ struct TopBottomView: View {
             }
         }
         .colorScheme(.light)
-        .navigationBarTitle("\(sector.capitalized)", displayMode: .inline)
+        .navigationTitle("\(sector.capitalized)")
+        .navigationBarTitleDisplayMode(.inline)
     }
     
     private func createButtons() -> some View {
