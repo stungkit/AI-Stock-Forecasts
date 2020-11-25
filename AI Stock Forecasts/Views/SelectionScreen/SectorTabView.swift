@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SectorTabView: View {
+    @Environment(\.managedObjectContext) private var moc
+    //@FetchRequest(entity: CustomCompany.entity(), sortDescriptors: []) var customCompanies: FetchedResults<CustomCompany>
     var sector: String
     var body: some View {
         TabView {
@@ -18,6 +20,11 @@ struct SectorTabView: View {
                 .tabItem {
                     Image(systemName: "chevron.down")
                     Text("Bottom 5")
+                }
+            AddView(sector: sector)
+                .tabItem {
+                    Image(systemName: "plus")
+                    Text("Add Company")
                 }
         }
         .colorScheme(.light)

@@ -1,9 +1,10 @@
 import SwiftUI
 
 struct HomeView: View {
-    let sectorlist = [ "industrials", "healthcare", "technology", "telecom-media", "goods", "energy", "financials", "all"]
+    @Environment(\.managedObjectContext) private var moc
+
     let layout = [GridItem(.flexible()), GridItem(.flexible())]
-    
+
     var body: some View {
         NavigationView {
             ZStack {
@@ -11,9 +12,13 @@ struct HomeView: View {
                 VStack {
                     HeaderView()
                     ScrollView {
+                        NavigationLink(destination: CustomCompanyList()) {
+                            Text("Manage custom companies")
+                        }
+                        Divider()
                         LazyVGrid(columns: layout, spacing: 10) {
-                            ForEach(sectorlist, id: \.self) { sector in
-                                Tile(sector: sector)
+                            ForEach(Sector.allCases, id: \.self) { sector in
+                                Tile(sector: sector.rawValue)
                             }
                         }
                     }
