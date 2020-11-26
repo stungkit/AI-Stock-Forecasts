@@ -7,9 +7,20 @@ struct SelectionView: View {
     // MARK: - Variables
     
     var sector: String
+    var fetchRequest: FetchRequest<CustomCompany>
+    
+    // Custom init for fetch request with a variable
+    init(sector: String) {
+        self.sector = sector
+        fetchRequest = FetchRequest<CustomCompany>(entity: CustomCompany.entity(), sortDescriptors: [], predicate: NSPredicate(format: "sector == %@", sector), animation: nil)
+    }
     
     var allCompanies: [Company] {
-        CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")]
+        var results = CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")]
+        for custom in fetchRequest.wrappedValue {
+            results.append(Company(name: custom.wrappedName, hash: custom.wrappedHash, arobase: custom.wrappedArobase))
+        }
+        return results
     }
     
     // MARK: - States
@@ -28,11 +39,7 @@ struct SelectionView: View {
                 SectionTitle(title: "Company Selection", subTitle: "Select a company in the list below: ")
                 createPicker()
                 Spacer()
-                Image(allCompanies[selectedCompanyIndex].hash)
-                    .resizable()
-                    .scaledToFit()
-                    .logoModifier()
-                    .padding(5)
+                createLogoImage(hash: allCompanies[selectedCompanyIndex].hash)
                 Spacer()
                 Divider()
                 createButtons().padding(.top, 5)
@@ -61,6 +68,18 @@ struct SelectionView: View {
                     .foregroundColor(Color.blue)
             }
         }
+    }
+    
+    private func createLogoImage(hash: String) -> some View {
+        return Image(hash)
+            .resizable()
+            .scaledToFit()
+            .padding(5)
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 10))
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
+            .shadow(color: .gray, radius: 2)
+            .padding(5)
     }
     
     private func createButtons() -> some View {
@@ -115,26 +134,4 @@ struct SelectionView: View {
         }
     }
     
-}
-
-// MARK: - Custom Modifiers
-    
-struct LogoModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        return //GeometryReader { geo in
-            content
-                .padding(5)
-                //.frame(height: geo.size.height)
-                .background(Color.white)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray, lineWidth: 1))
-                .shadow(color: .gray, radius: 2)
-        }
-    //}
-}
-
-extension View {
-    func logoModifier() -> some View {
-        return self.modifier(LogoModifier())
-    }
 }

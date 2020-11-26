@@ -23,6 +23,9 @@ struct CompanyView: View {
     
     var body: some View {
         Form {
+            Image("custom")
+                .resizable()
+                .scaledToFit()
             // Text in display mode or Texfield in modification mode
             Section(header: Text("Name")) {
                 modificationMode ? AnyView(TextField(company.wrappedName, text: $newName)) : AnyView(Text(company.wrappedName))

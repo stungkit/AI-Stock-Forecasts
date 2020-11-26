@@ -27,6 +27,10 @@ extension CustomCompany {
     public var wrappedSector: String {
         sector ?? "Unknown Sector"
     }
+    
+    public var wrappedHash: String {
+        "#\(wrappedId)"
+    }
 
 }
 
