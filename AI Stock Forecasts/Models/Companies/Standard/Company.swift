@@ -1,5 +1,5 @@
 import Foundation
-
+/*
 struct Company {
     var name: String
     var hash: String
@@ -20,14 +20,15 @@ struct CompanyScore: Identifiable, Hashable {
         Double(hashScore) * 0.5 + Double(arobaseScore) * 0.5 + Double(newsScore) * 2
     }
 }
-
-class Company2: Identifiable {
+*/
+class Company: Identifiable {
 // may be used later to harmonize datastructures
     let id: String
     let name: String
     let arobase: String
     let sector: String
     let custom: Bool
+    
     var hashScore: Int = 0
     var arobaseScore: Int = 0
     var newsScore: Int = 0
@@ -47,6 +48,20 @@ class Company2: Identifiable {
         self.sector = sector
         self.custom = custom
     }
+    
+    func updateHashScore(newHashScore: Int) {
+        hashScore = newHashScore
+    }
+    
+    func updateArobaseScore(newArobaseScore: Int) {
+        arobaseScore = newArobaseScore
+    }
+    
+    func updateNewsScore(newNewsScore: Int) {
+        newsScore = newNewsScore
+    }
+    
+    
 }
 
 enum Sector: String, CaseIterable {

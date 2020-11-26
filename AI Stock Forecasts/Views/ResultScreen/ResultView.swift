@@ -4,12 +4,7 @@ struct ResultView: View {
     
     @State var selectedSegment: Segment?
     
-    var hashScore: Int
-    var arobaseScore: Int
-    var newsScore: Int
-    var name: String
-    var totalScore: Double
-    var stockSymbol: String
+    var company: Company
     
     // MARK: - Screen Body
     
@@ -24,13 +19,13 @@ struct ResultView: View {
                         createCircleControl(radius: circleRadius)
                         createDescription()
                         Divider()
-                        StockChart(stockSymbol: stockSymbol)
+                        StockChart(stockSymbol: company.id)
                     }
                 }
             }
         }
         .colorScheme(.light)
-        .navigationTitle(name)
+        .navigationTitle(company.name)
         .navigationBarTitleDisplayMode(.inline)
     }
     
@@ -88,10 +83,7 @@ struct ResultView: View {
             totalBalance: totalBalance,
             segments: segments,
             selectedSegment: $selectedSegment,
-            hashScore: hashScore,
-            arobaseScore: arobaseScore,
-            newsScore: newsScore,
-            totalScore: totalScore
+            company: company
         )
         
         return circleControl
@@ -102,9 +94,9 @@ struct ResultView: View {
     // MARK: - Debug
     private func createDebug() -> some View {
         HStack {
-             Text("#: \(hashScore) |")
-             Text("@: \(arobaseScore) |")
-             Text("news: \(newsScore) |")
+            Text("#: \(company.hashScore) |")
+            Text("@: \(company.arobaseScore) |")
+            Text("news: \(company.newsScore) |")
          }
     }
     

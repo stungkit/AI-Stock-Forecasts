@@ -6,12 +6,23 @@ struct TopBottomView: View {
     
     var sector: String
     var type: ArrowType
+    var fetchRequest: FetchRequest<CustomCompany>
     
-    var allCompanies: [Company] {
-        CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")]
+    // Custom init for fetch request with a variable
+    init(sector: String, type: ArrowType) {
+        self.sector = sector
+        self.type = type
+        fetchRequest = FetchRequest<CustomCompany>(entity: CustomCompany.entity(), sortDescriptors: [], predicate: NSPredicate(format: "sector == %@", sector), animation: nil)
     }
     
-    @State private var companyScoreArray: [CompanyScore] = [CompanyScore]()
+    var allCompanies: [Company] {
+        var results = CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(id: "ERROR", name: "ERROR", arobase: "ERROR", sector: "ERROR", custom: false)]
+        for custom in fetchRequest.wrappedValue {
+            results.append(Company(id: custom.wrappedId, name: custom.wrappedName, arobase: custom.wrappedArobase, sector: custom.wrappedSector, custom: true))
+        }
+        return results
+    }
+    
     @State private var ready: Bool = false
     @State private var progression: Double = 0.0
     
@@ -48,20 +59,15 @@ struct TopBottomView: View {
                 for company in allCompanies {
                     network.fetchTweets1(company: company.arobase) { arobaseScore in
                         network.fetchTweets2(company: company.hash) { hashScore in
-                            network.fetchData(company: company.symbol) { newsScore in
+                            network.fetchData(company: String(company.arobase.dropFirst())) { newsScore in
                                 progression += 1.0 / Double(allCompanies.count)
-                                companyScoreArray.append(CompanyScore(
-                                    id: UUID(),
-                                    name: company.name,
-                                    symbol: company.symbol,
-                                    hashScore: hashScore,
-                                    arobaseScore: arobaseScore,
-                                    newsScore: newsScore
-                                ))
-                                companyScoreArray.sort {
+                                company.arobaseScore = arobaseScore
+                                company.hashScore = hashScore
+                                company.newsScore = newsScore
+                                /*companyScoreArray.sort {
                                     $0.totalScore > $1.totalScore
-                                }
-                                ready = (allCompanies.count == companyScoreArray.count)
+                                }*/
+                                ready = (progression > 0.999)
                             }
                         }
                     }
@@ -72,7 +78,7 @@ struct TopBottomView: View {
             
             NavigationLink(destination: TopBottomResultsView(
                 sector: sector,
-                companyScoreArray: companyScoreArray,
+                companyArray: allCompanies,
                 type: type
             )) {
                 ready ? buttonAfterPredict : buttonBeforePredict

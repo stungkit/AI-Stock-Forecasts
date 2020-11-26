@@ -2,14 +2,14 @@ import SwiftUI
 
 struct TopBottomResultsView: View {
     var sector: String
-    var companyScoreArray: [CompanyScore]
+    var companyArray: [Company]
     var type: ArrowType
     
-    var top5Array: Array<CompanyScore>.SubSequence {
-        companyScoreArray.prefix(5)
+    var top5Array: Array<Company>.SubSequence {
+        companyArray.sorted(by: {$0.totalScore > $1.totalScore}).prefix(5)
     }
-    var bottom5Array: Array<CompanyScore>.SubSequence {
-        companyScoreArray.suffix(5)
+    var bottom5Array: Array<Company>.SubSequence {
+        companyArray.sorted(by: {$0.totalScore < $1.totalScore}).prefix(5)
     }
     
     var title: String {
@@ -20,14 +20,7 @@ struct TopBottomResultsView: View {
         Form {
             Section(header: Text("\(title) companies")) {
                 ForEach(type == .up ? top5Array : bottom5Array) { element in
-                    NavigationLink(destination: ResultView(
-                        hashScore: element.hashScore,
-                        arobaseScore: element.arobaseScore,
-                        newsScore: element.newsScore,
-                        name: element.name,
-                        totalScore: element.totalScore,
-                        stockSymbol: element.symbol
-                    )) {
+                    NavigationLink(destination: ResultView(company: element)) {
                         HStack {
                             Text(element.name)
                             Spacer()

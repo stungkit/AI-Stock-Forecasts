@@ -16,19 +16,18 @@ struct SelectionView: View {
     }
     
     var allCompanies: [Company] {
-        var results = CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(name: "ERROR", hash: "ERROR", arobase: "ERROR")]
+        var results = CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(id: "ERROR", name: "ERROR", arobase: "ERROR", sector: "ERROR", custom: false)]
         for custom in fetchRequest.wrappedValue {
-            results.append(Company(name: custom.wrappedName, hash: custom.wrappedHash, arobase: custom.wrappedArobase))
+            results.append(Company(id: custom.wrappedId, name: custom.wrappedName, arobase: custom.wrappedArobase, sector: custom.wrappedSector, custom: true))
         }
         return results
     }
     
     // MARK: - States
     
-    @State private var selectedCompanyIndex: Int = 0
+    @State private var selectedCompany = "Test"
     @State private var ready: Bool = false
     @State private var progression: Double = 0.0
-    @State private var companyScore = CompanyScore(id: UUID(), name: "ERROR", symbol: "ERROR", hashScore: 0, arobaseScore: 0, newsScore: 0)
     
     // MARK: - Screen body
     
@@ -39,7 +38,7 @@ struct SelectionView: View {
                 SectionTitle(title: "Company Selection", subTitle: "Select a company in the list below: ")
                 createPicker()
                 Spacer()
-                createLogoImage(hash: allCompanies[selectedCompanyIndex].hash)
+                createLogoImage(hash: allCompanies[selectedCompanyIndex].custom ? "custom" : allCompanies[selectedCompanyIndex].hash)
                 Spacer()
                 Divider()
                 createButtons().padding(.top, 5)
@@ -55,9 +54,9 @@ struct SelectionView: View {
     
     private func createPicker() -> some View {
         return VStack {
-            Picker(selection: $selectedCompanyIndex.animation(.easeInOut), label: Text("")) {
-                ForEach(0 ..< allCompanies.count) {
-                    Text(allCompanies[$0].name)
+            Picker(selection: $selectedCompany.animation(.easeInOut), label: Text("")) {
+                ForEach(allCompanies) {
+                    Text($0.name)
                 }
             }
             .labelsHidden()
@@ -98,16 +97,19 @@ struct SelectionView: View {
                     network.fetchTweets2(company: selectedCompany.hash) { hashScore in
                         progression = 0.6
                         network.fetchData(company: String(selectedCompany.arobase.dropFirst())) { newsScore in
-                            companyScore = CompanyScore(
-                                id: UUID(),
-                                name: selectedCompany.name,
-                                symbol: selectedCompany.symbol,
-                                hashScore: hashScore,
-                                arobaseScore: arobaseScore,
-                                newsScore: newsScore
-                            )
+                            selectedCompany.updateArobaseScore(newArobaseScore: arobaseScore)
+                            selectedCompany.updateHashScore(newHashScore: hashScore)
+                            selectedCompany.updateNewsScore(newNewsScore: newsScore)
                             progression = 1.0
                             ready = true
+                            print(selectedCompany.name)
+                            print(selectedCompany.arobaseScore)
+                            print(selectedCompany.hashScore)
+                            print(selectedCompany.newsScore)
+                            print("-----------------")
+                            allCompanies[selectedCompanyIndex].updateArobaseScore(newArobaseScore: 100)
+                            print(allCompanies[selectedCompanyIndex].arobaseScore)
+                            print(selectedCompanyIndex)
                         }
                     }
                 }
@@ -115,15 +117,7 @@ struct SelectionView: View {
                 predictButton
             }
             
-            NavigationLink(destination: ResultView(
-                hashScore: companyScore.hashScore,
-                arobaseScore: companyScore.arobaseScore,
-                newsScore: companyScore.newsScore,
-                name: companyScore.name,
-                totalScore: companyScore.totalScore,
-                stockSymbol: companyScore.symbol
-                
-            )) {
+            NavigationLink(destination: ResultView(company: allCompanies[selectedCompanyIndex])) {
                 ready ? buttonAfterPredict : buttonBeforePredict
             }
             .disabled(!ready)

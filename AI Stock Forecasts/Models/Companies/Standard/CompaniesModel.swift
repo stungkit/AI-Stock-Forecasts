@@ -20,9 +20,12 @@ struct CompaniesModel {
             for company in fullPlist {
                 if company["sector"] == sector || sector == "all" {
                     companyList.append(
-                        Company(name: company["name"] ?? "ERROR",
-                                hash: company["hash"] ?? "ERROR",
-                                arobase: company["arobase"] ?? "ERROR"
+                        Company(
+                            id: company["id"] ?? "ERROR",
+                            name: company["name"] ?? "ERROR",
+                            arobase: company["arobase"] ?? "ERROR",
+                            sector: company["sector"] ?? "ERROR",
+                            custom: false
                         )
                     )
                 }

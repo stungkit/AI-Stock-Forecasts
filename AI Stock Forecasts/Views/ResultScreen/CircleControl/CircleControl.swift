@@ -7,13 +7,10 @@ struct CircleControl: View {
     
     @Binding var selectedSegment: Segment?
     
-    var hashScore: Int // from -60 to 60
-    var arobaseScore: Int // from -60 to 60
-    var newsScore: Int  // from -20 to 20
-    var totalScore: Double // from -100 to 100
+    var company: Company
     
     var shiftedScore: Double {
-        return totalScore + 100 // from 0 to 200
+        return company.totalScore + 100 // from 0 to 200
     }
     
     private let lineWidth: CGFloat = 44.0
@@ -151,7 +148,7 @@ struct CircleControl: View {
         let diametr = radius * 2.0 - lineWidth * 2.0 - 16.0
         return VStack {
             Text("Score:")
-            Text("\(String(format: "%.0f", totalScore))")
+            Text("\(String(format: "%.0f", company.totalScore))")
         }.font(Font.system(size: 40.0, weight: .bold, design: .rounded))
         // incorrect error message with xcode12 - should work fine
         .frame(width: diametr, height: 75.0, alignment: .center)
