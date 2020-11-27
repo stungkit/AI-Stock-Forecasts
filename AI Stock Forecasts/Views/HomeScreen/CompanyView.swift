@@ -12,13 +12,13 @@ struct CompanyView: View {
     @State private var newName: String = ""
     @State private var newId: String = ""
     @State private var newArobase: String = ""
-    @State private var newSector: String = ""
+    @State private var newSector: Sector = Sector.all
     
     func updateFields() {
         newName = company.wrappedName
         newId = company.wrappedId
         newArobase = company.wrappedArobase
-        newSector = company.wrappedSector
+        //newSector = company.wrappedSector
     }
     
     var body: some View {
@@ -43,7 +43,7 @@ struct CompanyView: View {
                 modificationMode ?
                     AnyView(Picker(selection: $newSector, label: Text("")) {
                         ForEach(Sector.allCases, id:\.self) { sector in
-                            Text(sector.rawValue)
+                            Text(sector.rawValue.capitalized).tag(sector.rawValue)
                         }
                     }) :
                     AnyView(Text(company.wrappedSector.capitalized))
@@ -63,7 +63,7 @@ struct CompanyView: View {
                         company.arobase = newArobase
                         company.id = newId
                         company.name = newName
-                        company.sector = newSector
+                        company.sector = newSector.rawValue
                         if moc.hasChanges {
                             do {
                                 try moc.save()

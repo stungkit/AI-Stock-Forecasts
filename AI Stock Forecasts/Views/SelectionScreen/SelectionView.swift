@@ -93,9 +93,9 @@ struct SelectionView: View {
                     network.fetchTweets2(company: selectedCompany.hash) { hashScore in
                         progression = 0.6
                         network.fetchData(company: String(selectedCompany.arobase.dropFirst())) { newsScore in
-                            selectedCompany.updateArobaseScore(newArobaseScore: arobaseScore)
-                            selectedCompany.updateHashScore(newHashScore: hashScore)
-                            selectedCompany.updateNewsScore(newNewsScore: newsScore)
+                            selectedCompany.arobaseScore = arobaseScore
+                            selectedCompany.hashScore = hashScore
+                            selectedCompany.newsScore = newsScore
                             progression = 1.0
                             ready = true
                             print(selectedCompany.name)
