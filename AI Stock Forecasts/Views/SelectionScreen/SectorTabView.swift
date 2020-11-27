@@ -2,21 +2,29 @@ import SwiftUI
 
 struct SectorTabView: View {
     @Environment(\.managedObjectContext) private var moc
-    //@FetchRequest(entity: CustomCompany.entity(), sortDescriptors: []) var customCompanies: FetchedResults<CustomCompany>
+    
     var sector: String
+    
+    var fetchRequest: FetchRequest<CustomCompany>
+    
+    init(sector: String) {
+        self.sector = sector
+        fetchRequest = FetchRequest<CustomCompany>(entity: CustomCompany.entity(), sortDescriptors: [], predicate: NSPredicate(format: "sector == %@", sector), animation: nil)
+    }
+    
     var body: some View {
         TabView {
-            SelectionView(sector: sector)
+            SelectionView(sector: sector, fetchRequest: fetchRequest)
                 .tabItem {
                     Image(systemName: "target")
                     Text("Single")
                 }
-            TopBottomView(sector: sector, type: .up)
+            TopBottomView(sector: sector, type: .up, fetchRequest: fetchRequest)
                 .tabItem {
                     Image(systemName: "chevron.up")
                     Text("Top 5")
                 }
-            TopBottomView(sector: sector, type: .down)
+            TopBottomView(sector: sector, type: .down, fetchRequest: fetchRequest)
                 .tabItem {
                     Image(systemName: "chevron.down")
                     Text("Bottom 5")

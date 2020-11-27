@@ -8,24 +8,20 @@ struct SelectionView: View {
     
     var sector: String
     var fetchRequest: FetchRequest<CustomCompany>
+    var allCompanies: [Company]
     
-    // Custom init for fetch request with a variable
-    init(sector: String) {
+    init(sector: String, fetchRequest: FetchRequest<CustomCompany>) {
         self.sector = sector
-        fetchRequest = FetchRequest<CustomCompany>(entity: CustomCompany.entity(), sortDescriptors: [], predicate: NSPredicate(format: "sector == %@", sector), animation: nil)
-    }
-    
-    var allCompanies: [Company] {
-        var results = CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(id: "ERROR", name: "ERROR", arobase: "ERROR", sector: "ERROR", custom: false)]
+        self.fetchRequest = fetchRequest
+        allCompanies = CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(id: "ERROR", name: "ERROR", arobase: "ERROR", sector: "ERROR", custom: false)]
         for custom in fetchRequest.wrappedValue {
-            results.append(Company(id: custom.wrappedId, name: custom.wrappedName, arobase: custom.wrappedArobase, sector: custom.wrappedSector, custom: true))
+            allCompanies.append(Company(id: custom.wrappedId, name: custom.wrappedName, arobase: custom.wrappedArobase, sector: custom.wrappedSector, custom: true))
         }
-        return results
     }
     
     // MARK: - States
     
-    @State private var selectedCompany = "Test"
+    @State private var selectedCompanyIndex: Int = 0
     @State private var ready: Bool = false
     @State private var progression: Double = 0.0
     
@@ -54,9 +50,9 @@ struct SelectionView: View {
     
     private func createPicker() -> some View {
         return VStack {
-            Picker(selection: $selectedCompany.animation(.easeInOut), label: Text("")) {
-                ForEach(allCompanies) {
-                    Text($0.name)
+            Picker(selection: $selectedCompanyIndex.animation(.easeInOut), label: Text("")) {
+                ForEach(0..<allCompanies.count) {
+                    Text(allCompanies[$0].name)
                 }
             }
             .labelsHidden()
@@ -106,10 +102,6 @@ struct SelectionView: View {
                             print(selectedCompany.arobaseScore)
                             print(selectedCompany.hashScore)
                             print(selectedCompany.newsScore)
-                            print("-----------------")
-                            allCompanies[selectedCompanyIndex].updateArobaseScore(newArobaseScore: 100)
-                            print(allCompanies[selectedCompanyIndex].arobaseScore)
-                            print(selectedCompanyIndex)
                         }
                     }
                 }

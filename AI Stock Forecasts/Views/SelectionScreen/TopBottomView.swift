@@ -7,20 +7,16 @@ struct TopBottomView: View {
     var sector: String
     var type: ArrowType
     var fetchRequest: FetchRequest<CustomCompany>
+    var allCompanies: [Company]
     
-    // Custom init for fetch request with a variable
-    init(sector: String, type: ArrowType) {
+    init(sector: String, type: ArrowType, fetchRequest: FetchRequest<CustomCompany>) {
         self.sector = sector
+        self.fetchRequest = fetchRequest
         self.type = type
-        fetchRequest = FetchRequest<CustomCompany>(entity: CustomCompany.entity(), sortDescriptors: [], predicate: NSPredicate(format: "sector == %@", sector), animation: nil)
-    }
-    
-    var allCompanies: [Company] {
-        var results = CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(id: "ERROR", name: "ERROR", arobase: "ERROR", sector: "ERROR", custom: false)]
+        allCompanies = CompaniesModel.getAllCompaniesFromSector(for: sector) ?? [Company(id: "ERROR", name: "ERROR", arobase: "ERROR", sector: "ERROR", custom: false)]
         for custom in fetchRequest.wrappedValue {
-            results.append(Company(id: custom.wrappedId, name: custom.wrappedName, arobase: custom.wrappedArobase, sector: custom.wrappedSector, custom: true))
+            allCompanies.append(Company(id: custom.wrappedId, name: custom.wrappedName, arobase: custom.wrappedArobase, sector: custom.wrappedSector, custom: true))
         }
-        return results
     }
     
     @State private var ready: Bool = false
