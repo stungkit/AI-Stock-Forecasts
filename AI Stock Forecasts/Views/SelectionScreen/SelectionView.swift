@@ -17,6 +17,9 @@ struct SelectionView: View {
         for custom in fetchRequest.wrappedValue {
             allCompanies.append(Company(id: custom.wrappedId, name: custom.wrappedName, arobase: custom.wrappedArobase, sector: custom.wrappedSector, custom: true))
         }
+        allCompanies.sort {
+            $0.name < $1.name
+        }
     }
     
     // MARK: - States
