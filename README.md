@@ -22,7 +22,7 @@ This app uses **SwiftUI** for the layout, **CoreML** for the models creation, **
 
 ## Quick presentation of the app
 
-![Untitled 001](https://user-images.githubusercontent.com/26531613/90335413-ee10dd00-dfa2-11ea-8fdc-c5b47f32738e.jpeg)
+![screenshot](https://user-images.githubusercontent.com/26531613/100556986-01a33380-3274-11eb-9199-6cbbc076f343.png)
 
 ## How does it work?
 
