@@ -29,12 +29,12 @@ The latest versions (1.4 and up) use **Core Data** to let you add, manage and sa
 
 For this app, I am using **Twitter** and **News-api** as the sources for my sentiment analysis.
 
-I am performing the company analysis via 100 twitter comments about the company. Those comments are splitted in 2 sets. The first set gathers the 50 most recent tweets about the company (Ex: @apple) and the second set gathers the 50 most recent tweets about the stock (Ex: #AAPL).
+I am performing the company analysis via 120 twitter comments about the company. Those comments are splitted in 2 sets. The first set gathers the 60 most recent tweets about the company (Ex: @apple) and the second set gathers the 60 most recent tweets about the stock (Ex: #AAPL).
 As the wording between those 2 sets of comments is very different, I used 2 different models trained on different datasets: IMBD dataset of 50k movie reviews for the first model and the Kaggle Sentiment Analysis on Financial Tweets dataset for the 2nd model.
 
 Then, I fetch the 20 most recent news articles about the company and use the first model to perform the sentiment analysis on those news articles
 
-Finally, I calculate a total score based on the sentiment analysis of those 120 comments
+Finally, I calculate a total score based on the sentiment analysis of those 140 comments
 
 ## Animated demo of the app
 
