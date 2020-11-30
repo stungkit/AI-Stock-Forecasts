@@ -18,7 +18,8 @@
 ## General information about this app
 
 This iOS app predicts Fortune 100 companies stock price evolution through sentiment analysis
-This app uses **SwiftUI** for the layout, **CoreML** for the models creation, **Twitter** and **News-api** as the sources for data analysis.
+It uses **SwiftUI** for the layout, **CoreML** for the models creation, **Twitter** and **News-api** as the sources for data analysis.
+The latest versions (1.4 and up) use **Core Data** to let you add, manage and save your own companies as well as cryptocurrencies.
 
 ## Quick presentation of the app
 
